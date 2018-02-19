@@ -40,6 +40,10 @@ sed -i 's/SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
 
 setenforce 0
 
+systemctl stop firewalld.service
+systemctl disable firewalld.service
+
+
 groupadd -r nginx    
 useradd -r -g nginx  nginx
 
