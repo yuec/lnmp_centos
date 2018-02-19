@@ -7,6 +7,7 @@ NGINX_VERSION=1.12.2
 MARIA_DB_VERSION=10.2.11
 
 #Maria DB 密码
+
 MARIA_DB_PASSWORD="root"
 
 #PHP 版本号
@@ -42,13 +43,13 @@ setenforce 0
 groupadd -r nginx    
 useradd -r -g nginx  nginx
 
-wget http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz
-
-tar xvf nginx-$NGINX_VERSION.tar.gz -C /usr/local/src
-
 yum -y groupinstall "Development tools"
 
 yum -y install gcc wget gcc-c++ automake autoconf libtool libxml2-devel libxslt-devel perl-devel perl-ExtUtils-Embed pcre-devel openssl-devel ncurses-devel
+
+wget http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz
+
+tar xvf nginx-$NGINX_VERSION.tar.gz -C /usr/local/src
 
 cd /usr/local/src/nginx-$NGINX_VERSION
 
@@ -92,7 +93,7 @@ cd /usr/local/src/nginx-$NGINX_VERSION
 --with-stream_ssl_module
 
 make && make install
-
+make clean
 mkdir -pv /var/tmp/nginx/client
 
 echo '#!/bin/sh 
@@ -198,7 +199,7 @@ chkconfig --add nginx
 chkconfig  nginx on
 
 service nginx start
-
+cd ~
 echo -e "\n\e[01;36m
 	You can try to visit you host by IP:  $HOST_PUBLIC_IP 
 	\n
@@ -250,7 +251,7 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql \
 -DDEFAULT_COLLATION=utf8_general_ci
 #todo
 make && make install
-
+make clean
 chown -R mysql:mysql /usr/local/mysql/
 
 cd  /usr/local/mysql/
@@ -281,7 +282,7 @@ source /etc/profile.d/mysql.sh
 service mysqld start 
 
 ./bin/mysqladmin -u root password $MARIA_DB_PASSWORD
-
+cd ~
 #mysql -h 127.0.0.1
 
 echo -e "\n\e[01;36m
@@ -319,7 +320,7 @@ cd /usr/local/src/php-$PHP_VERSION
 --with-pdo-sqlite 
 
 make && make install
-
+make clean
 cp /usr/local/src/php-$PHP_VERSION/php.ini-production /etc/php.ini
 
 cd /usr/local/php/etc/
@@ -494,7 +495,6 @@ echo -e "\n\e[01;36m
 	
 	\n Bye Bye
 \033[0m\n"
-
 
 
 
