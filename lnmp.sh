@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Nginx 版本号
-NGINX_VERSION=1.9.9
+NGINX_VERSION=1.12.2 
 
 #Maria DB 版本号
 MARIA_DB_VERSION=10.2.11
