@@ -36,12 +36,12 @@ echo -e "\n\e[01;36m
 	
 \033[0m\n"
 
-sed -i 's/SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
+#sed -i 's/SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
 
-setenforce 0
+#setenforce 0
 
-systemctl stop firewalld.service
-systemctl disable firewalld.service
+#systemctl stop firewalld.service
+#systemctl disable firewalld.service
 
 
 groupadd -r nginx    
